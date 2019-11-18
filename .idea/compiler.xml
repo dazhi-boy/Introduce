@@ -11,7 +11,7 @@
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="admin" target="1.8" />
-      <module name="Introduce" target="1.5" />
+      <module name="Introduce" target="1.8" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
