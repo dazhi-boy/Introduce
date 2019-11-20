@@ -1,10 +1,10 @@
 spring:
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
-    driverClassName: com.mysql.cj.jdbc.Driver
-    driver-class-name: com.mysql.cj.jdbc.Driver
+    driverClassName: com.mysql.jdbc.Driver
+    driver-class-name: com.mysql.jdbc.Driver
     platform: mysql
-    url: jdbc:mysql://127.0.0.1:3310/test?serverTimezone=GMT%2B8&useUnicode=true&characterEncoding=utf-8
+    url: jdbc:mysql://127.0.0.1:3306/test?serverTimezone=GMT%2B8&useUnicode=true&characterEncoding=utf-8
     username: root
     password: root
     initialSize: 5
@@ -21,25 +21,19 @@ spring:
     filters: stat,wall
     logSlowSql: true
 
-    jpa:
-      # 配置 DBMS 类型
-      database: MYSQL
-      # 配置是否将执行的 SQL 输出到日志
-      show-sql: true
-      properties:
-        hibernate:
-          hbm2ddl:
-            # 配置开启自动更新表结构
-            auto: update
+  jpa:
+    # 配置 DBMS 类型
+    database: MYSQL
+    # 配置是否将执行的 SQL 输出到日志
+    show-sql: true
+    properties:
+      hibernate:
+        hbm2ddl:
+          # 配置开启自动更新表结构
+          auto: update
 
-
-hibernate:
-  show_sql=true:
 #debug: true
 server:
   servlet:
     context-path: /admin
   port: 8080
-
-logging.level.org.hibernate.SQL=DEBUG
-logging.level.org.hibernate.type.descriptor.sql.BasicBinder=TRACE

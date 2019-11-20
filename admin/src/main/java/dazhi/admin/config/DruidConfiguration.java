@@ -16,13 +16,13 @@ import org.springframework.stereotype.Component;
 import javax.sql.DataSource;
 import java.sql.SQLException;
 
-@Configuration
+//@Configuration
 public class DruidConfiguration {
     private static final Logger logger = LoggerFactory.getLogger(DruidConfiguration.class);
 
     private static final String DB_PREFIX = "spring.datasource";
 
-    @Bean
+//    @Bean
     public ServletRegistrationBean druidServlet() {
         logger.info("init Druid Servlet Configuration ");
         ServletRegistrationBean servletRegistrationBean = new ServletRegistrationBean(new StatViewServlet(), "/druid/*");
@@ -38,7 +38,7 @@ public class DruidConfiguration {
         return servletRegistrationBean;
     }
 
-    @Bean
+//    @Bean
     public FilterRegistrationBean filterRegistrationBean() {
         FilterRegistrationBean filterRegistrationBean = new FilterRegistrationBean(new WebStatFilter());
         filterRegistrationBean.addUrlPatterns("/*");
@@ -47,8 +47,8 @@ public class DruidConfiguration {
     }
 
     //解决 spring.datasource.filters=stat,wall,log4j 无法正常注册进去
-    @Component
-    @ConfigurationProperties(prefix = DB_PREFIX)
+//    @Component
+//    @ConfigurationProperties(prefix = DB_PREFIX)
     class IDataSourceProperties {
         private String url;
         private String username;
@@ -69,8 +69,8 @@ public class DruidConfiguration {
         private String filters;
         private String connectionProperties;
 
-        @Bean     //声明其为Bean实例
-        @Primary  //在同样的DataSource中，首先使用被标注的DataSource
+//        @Bean     //声明其为Bean实例
+//        @Primary  //在同样的DataSource中，首先使用被标注的DataSource
         public DataSource dataSource() {
             DruidDataSource datasource = new DruidDataSource();
             datasource.setUrl(url);
