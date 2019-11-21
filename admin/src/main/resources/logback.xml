@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+	<property name="LOG_PATH" value="./logs"/>
+	<property name="APPDIR" value="graceLogs"/>
+
+	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder>
+			<pattern>1-%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger - %msg%n</pattern>
+			<charset>GBK</charset>
+		</encoder>
+	</appender>
+
+
+	<!-- error级别日志文件输出,按日期时间滚动记录输出 -->
+	<appender name="FILEERROR" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>${LOG_PATH}/${APPDIR}/log_error.log</file>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>${LOG_PATH}/${APPDIR}/error/log-error-%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+			<timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+				<maxFileSize>500MB</maxFileSize>
+			</timeBasedFileNamingAndTriggeringPolicy>
+		</rollingPolicy>
+		<append>true</append>
+		<encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+			<pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level %logger Line:%-3L - %msg%n</pattern>
+			<charset>utf-8</charset>
+		</encoder>
+		<filter class="ch.qos.logback.classic.filter.LevelFilter">
+			<level>error</level>
+			<onMatch>ACCEPT</onMatch>
+			<onMismatch>DENY</onMismatch>
+		</filter>
+	</appender>
+
+	<!-- warn级别日志文件输出,按日期时间滚动记录输出 -->
+	<appender name="FILEWARN" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>${LOG_PATH}/${APPDIR}/log_warn.log</file>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>${LOG_PATH}/${APPDIR}/warn/log-warn-%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+			<timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+				<maxFileSize>2MB</maxFileSize>
+			</timeBasedFileNamingAndTriggeringPolicy>
+		</rollingPolicy>
+		<append>true</append>
+		<encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+			<pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level %logger Line:%-3L - %msg%n</pattern>
+			<charset>utf-8</charset>        </encoder>
+		<filter class="ch.qos.logback.classic.filter.LevelFilter">
+			<level>warn</level>
+			<onMatch>ACCEPT</onMatch>
+			<onMismatch>DENY</onMismatch>
+		</filter>
+	</appender>
+
+
+	<!-- info级别日志文件输出,按日期时间滚动记录输出 -->
+	<appender name="FILEINFO" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>${LOG_PATH}/${APPDIR}/log_info.log</file>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>${LOG_PATH}/${APPDIR}/info/log-info-%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+			<timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+				<maxFileSize>2MB</maxFileSize>
+			</timeBasedFileNamingAndTriggeringPolicy>
+		</rollingPolicy>
+		<append>true</append>
+		<encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+			<pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level %logger Line:%-3L - %msg%n</pattern>
+			<charset>utf-8</charset>
+		</encoder>
+		<filter class="ch.qos.logback.classic.filter.LevelFilter">
+			<level>info</level>
+			<onMatch>ACCEPT</onMatch>
+			<onMismatch>DENY</onMismatch>
+		</filter>
+	</appender>
+
+	<appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder>
+			<pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level %logger Line:%-3L - %msg%n</pattern>
+		</encoder>
+	</appender>
+
+	<!-- 文件保存日志的相关配置 -->
+	<appender name="FILEOUT" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<!--日志文件输出的文件名-->
+			<FileNamePattern>${LOG_HOME}/TestWeb.log.%d{yyyy-MM-dd}.log</FileNamePattern>
+			<!--日志文件保留天数-->
+			<MaxHistory>30</MaxHistory>
+		</rollingPolicy>
+
+		<encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+			<!--格式化输出：%d表示日期，%thread表示线程名，%-5level：级别从左显示5个字符宽度%msg：日志消息，%n是换行符-->
+			<pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{50} - %msg%n</pattern>
+		</encoder>
+		<!--日志文件最大的大小-->
+		<triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+			<MaxFileSize>10MB</MaxFileSize>
+		</triggeringPolicy>
+	</appender>
+
+	<!--设置为OFF,即屏蔽; 留下sqltiming作为INFO级别输出-->
+	<logger name="jdbc.connection" level="OFF"/>
+	<logger name="jdbc.resultset" level="OFF"/>
+	<logger name="jdbc.resultsettable" level="OFF"/>
+	<logger name="jdbc.audit" level="OFF"/>
+	<logger name="jdbc.sqltiming" level="INFO"/>
+	<logger name="jdbc.sqlonly" level="OFF"/>
+
+	<!--设置日志打印级别为INFO-->
+	<!-- 基于dubug处理日志：具体控制台或者文件对日志级别的处理还要看所在appender配置的filter，如果没有配置filter，则使用root配置 -->
+	<root level="INFO">
+		<appender-ref ref="CONSOLE"/>
+		<appender-ref ref="FILEINFO"/>
+		<appender-ref ref="FILEWARN"/>
+		<appender-ref ref="FILEERROR"/>
+		<!--<appender-ref ref="STDOUT" />-->
+		<!--<appender-ref ref="FILEOUT" />-->
+	</root>
+
+</configuration>

@@ -21,10 +21,10 @@ public class UserController extends AbstractController<UserService> {
         this.service = service;
     }
 
-    @RequestMapping(value = "getUserList")
-    @ResponseBody
-    public List<User> getUserList() {
-        return service.getUserList();
-    }
+//    @RequestMapping(value = "getUserList")
+//    @ResponseBody
+//    public List<User> getUserList() {
+//        return service.getUserList();
+//    }
 
 }
