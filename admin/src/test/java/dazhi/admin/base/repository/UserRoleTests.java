@@ -1,9 +1,7 @@
-package dazhi.admin.base;
+package dazhi.admin.base.repository;
 
 import dazhi.admin.base.entity.Role;
 import dazhi.admin.base.entity.User;
-import dazhi.admin.base.repository.RoleRepository;
-import dazhi.admin.base.repository.UserRepository;
 import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,7 +32,6 @@ public class UserRoleTests extends BaseTests {
         List<User> users =  userRepository.findAll();
 //        User user = users.get(0);
 //        System.out.println(user.getRole().getName());
-        Assert.assertEquals(users.size(),1);
     }
     /*
     @After

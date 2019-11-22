@@ -1,4 +1,4 @@
-package dazhi.admin.base;
+package dazhi.admin.base.repository;
 
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;

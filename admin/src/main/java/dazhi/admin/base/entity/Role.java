@@ -9,12 +9,13 @@ import java.util.Set;
 @Table(name="sys_role")
 public class Role implements Serializable {
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long id;
     private String name;
     private String description;
-    @ManyToMany
-    @JoinTable(name = "sys_role_resource",joinColumns = {@JoinColumn(name = "role_id",referencedColumnName = "id")},inverseJoinColumns = {@JoinColumn(name = "resource_id",referencedColumnName = "id")})
+    @ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    @JoinTable(name = "sys_role_resource",joinColumns = {@JoinColumn(name = "role_id",referencedColumnName = "id")},
+            inverseJoinColumns = {@JoinColumn(name = "resource_id",referencedColumnName = "id")})
     private Set<Resource> resources = new HashSet<Resource>();//授权的资源
     private Boolean available;
 
@@ -46,7 +47,7 @@ public class Role implements Serializable {
         return resources;
     }
 
-    public void setResource_ids(Set<Resource> resourcs) {
+    public void setResources(Set<Resource> resourcs) {
         this.resources = resources;
     }
 

@@ -9,7 +9,7 @@ import java.util.List;
 public class User implements Serializable {
     // @Id是用来标识主键的，而@GeneratedValue则是用来指定主键策略的
     @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long id;
     private String username;
     private String password;

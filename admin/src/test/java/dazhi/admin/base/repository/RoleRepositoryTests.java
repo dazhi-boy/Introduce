@@ -1,7 +1,6 @@
-package dazhi.admin.base;
+package dazhi.admin.base.repository;
 
 import dazhi.admin.base.entity.Role;
-import dazhi.admin.base.repository.RoleRepository;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -22,7 +21,6 @@ public class RoleRepositoryTests extends BaseTests {
     @Test
     public void findAll(){
         List<Role> roles = roleRepository.findAll();
-        Assert.assertEquals(roles.size(),1);
     }
 
     @After

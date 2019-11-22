@@ -7,7 +7,7 @@
 	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
 		<encoder>
 			<pattern>1-%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger - %msg%n</pattern>
-			<charset>GBK</charset>
+			<charset>UTF-8</charset>
 		</encoder>
 	</appender>
 
@@ -107,15 +107,19 @@
 	<logger name="jdbc.audit" level="OFF"/>
 	<logger name="jdbc.sqltiming" level="INFO"/>
 	<logger name="jdbc.sqlonly" level="OFF"/>
+	<logger name="org.hibernate.SQL" level="DEBUG"/>  //该语句控制打印SQL，如果你在yml或者properties文件里配置了“spring.jpa.properties.hibernate.show_sql=true ” ，则不需要再配置该语句
+	<logger name="org.hibernate.engine.QueryParameters" level="DEBUG"/>
+	<logger name="org.hibernate.engine.query.HQLQueryPlan" level="DEBUG"/>
+	<logger name="org.hibernate.type.descriptor.sql.BasicBinder" level="TRACE"/>
 
 	<!--设置日志打印级别为INFO-->
 	<!-- 基于dubug处理日志：具体控制台或者文件对日志级别的处理还要看所在appender配置的filter，如果没有配置filter，则使用root配置 -->
-	<root level="INFO">
-		<appender-ref ref="CONSOLE"/>
+	<root level="info">
+		<!--<appender-ref ref="CONSOLE"/>
 		<appender-ref ref="FILEINFO"/>
 		<appender-ref ref="FILEWARN"/>
-		<appender-ref ref="FILEERROR"/>
-		<!--<appender-ref ref="STDOUT" />-->
+		<appender-ref ref="FILEERROR"/>-->
+		<appender-ref ref="STDOUT" />
 		<!--<appender-ref ref="FILEOUT" />-->
 	</root>
 
